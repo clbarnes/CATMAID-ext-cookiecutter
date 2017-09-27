@@ -1,7 +1,7 @@
 {
   "full_name": "Anoni Moose",
   "email": "moose_a@janelia.hhmi.org",
-  "github_user": "anonimoose.",
+  "github_username": "anonimoose.",
   "project_title": "My Extension",
   "app_name": "{{ cookiecutter.project_title.lower().replace(' ', '').replace('-', '').replace('_', '') }}",
   "project_name": "CATMAID-{{ cookiecutter.app_name }}",

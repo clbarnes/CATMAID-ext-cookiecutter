@@ -16,7 +16,7 @@ setup(
     license='{{ cookiecutter.license }}',
     description='A django app which acts as a drop-in extension for CATMAID.',
     long_description=README,
-    url='https://github.com/{{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}',
+    url='https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}',
     author='{{ cookiecutter.full_name }}',
     author_email='{{ cookiecutter.email }}',
     classifiers=[
