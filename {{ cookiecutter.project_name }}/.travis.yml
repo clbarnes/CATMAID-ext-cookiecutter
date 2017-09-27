@@ -5,9 +5,13 @@ notifications:
 language: python
 cache: pip
 python:
+  {% if cookiecutter.supports_py2 == 'y' -%}
   - "2.7"
-  - "3.5"
   - "pypy"
+  {%- endif %}
+  {% if cookiecutter.supports_py3 == 'y' -%}
+  - "3.5"
+  {%- endif %}
 env:
   global:
     - CATMAID_DIR=$TRAVIS_BUILD_DIR/travis/CATMAID
