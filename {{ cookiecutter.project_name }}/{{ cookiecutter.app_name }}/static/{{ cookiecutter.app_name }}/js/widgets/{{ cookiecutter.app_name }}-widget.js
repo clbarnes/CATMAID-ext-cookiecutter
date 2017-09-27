@@ -19,9 +19,13 @@
     return {
       helpText: '{{ cookiecutter.app_name.title() }} Widget: ',
       controlsID: this.idPrefix + 'controls',
-      createControls: function(controls) {},
+      createControls: function(controls) {
+        controls.appendChild(document.createTextNode('Controls go here'))
+      },
       contentID: this.idPrefix + 'content',
-      createContent: function(container) {},
+      createContent: function(container) {
+        container.appendChild(document.createTextNode('Controls go here'))
+      },
       init: function() {}
     };
   };
@@ -30,6 +34,11 @@
     this.unregisterInstance();
   };
 
-  CATMAID.registerWidget({key: '{{ cookiecutter.app_name }}-widget', creator: {{ cookiecutter.app_name.title() }}Widget});
+  CATMAID.registerWidget({
+    name: '{{ cookiecutter.project_title }} Widget',
+    description: 'Widget associated with the {{ cookiecutter.app_name }} app',
+    key: '{{ cookiecutter.app_name }}-widget',
+    creator: {{ cookiecutter.app_name.title() }}Widget
+  });
 
 })(CATMAID);
