@@ -12,16 +12,7 @@ endpoints and static files.
 1. Install {{ cookiecutter.app_name }} in whichever python environment is running
 CATMAID with `pip install -e path/to/this/directory`
 
-2. Add "{{ cookiecutter.app_name }}" to your `INSTALLED_APPS` setting like this:
+2. Run `python manage.py migrate` to create the {{ cookiecutter.app_name }} models.
 
-```python
-INSTALLED_APPS = [
-    ...
-    "{{ cookiecutter.app_name }}.apps.{{ cookiecutter.app_name.title() }}Config",
-]
-```
-
-3. Run `python manage.py migrate` to create the {{ cookiecutter.app_name }} models.
-
-4. Run `python manage.py collectstatic -l` to pick up the
+3. Run `python manage.py collectstatic -l` to pick up
 {{ cookiecutter.app_name }}'s static files.
