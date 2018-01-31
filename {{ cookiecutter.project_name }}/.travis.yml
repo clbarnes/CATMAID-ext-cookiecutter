@@ -1,7 +1,5 @@
 dist: trusty
 sudo: required
-notifications:
-  email: false
 language: python
 cache: pip
 python:
@@ -11,22 +9,28 @@ python:
   {%- endif %}
   {% if cookiecutter.supports_py3 == 'y' -%}
   - "3.5"
+  - "3.6"
+  - "pypy3"
   {%- endif %}
 env:
-  global:
-    - CATMAID_DIR=$TRAVIS_BUILD_DIR/travis/CATMAID
+  - CATMAID_DIR=$TRAVIS_BUILD_DIR/travis/CATMAID CATMAID_BRANCH=master
+  - CATMAID_DIR=$TRAVIS_BUILD_DIR/travis/CATMAID CATMAID_BRANCH=dev
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: CATMAID_DIR=$TRAVIS_BUILD_DIR/travis/CATMAID CATMAID_BRANCH=dev
 addons:
   apt:
     sources:
-    - precise-pgdg-9.5
+    - precise-pgdg-9.6
     packages:
-    - postgresql-9.5
-    - postgresql-contrib-9.5
-  postgresql: 9.5
+    - postgresql-9.6
+    - postgresql-contrib-9.6
+  postgresql: 9.6
 before_install:
   - travis_retry sudo apt-get update -qq
   # setup CATMAID
-  - git clone https://github.com/catmaid/CATMAID.git $CATMAID_DIR
+  - git clone -b $CATMAID_BRANCH https://github.com/catmaid/CATMAID.git $CATMAID_DIR
   - cd $CATMAID_DIR
   - ./scripts/travis/install_requirements.sh
   - ./scripts/travis/setup_database.sh
@@ -41,3 +45,4 @@ script:
   - coverage run --source={{ cookiecutter.app_name }} manage.py test {{ cookiecutter.app_name }}.tests
 after_success:
   - coveralls
+
