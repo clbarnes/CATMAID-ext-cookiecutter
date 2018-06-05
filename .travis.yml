@@ -14,7 +14,7 @@ before_install:
   - export PATH=$(npm bin):$PATH
 
 install:
-  - cookiecutter --no-input . -o $EXT_DIR
+  - cookiecutter --no-input .
 
 script:
   - flake8 --config $EXT_DIR/.travis.flake8 --ignore=F401 $EXT_DIR
