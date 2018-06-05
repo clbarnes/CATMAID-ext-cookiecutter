@@ -6,6 +6,7 @@ from django.db import connection
 
 from psycopg2.extensions import AsIs
 
+
 class Command(BaseCommand):
     help = 'Drops all database tables backing the {{ cookiecutter.app_name }} models.'
 
@@ -29,7 +30,7 @@ class Command(BaseCommand):
                 '{}: Dropping {}...'.format(ss_model.__name__, table)
             )
 
-            cursor.execute('DROP TABLE IF EXISTS %s CASCADE;', (AsIs(table), ))
+            cursor.execute('DROP TABLE IF EXISTS %s CASCADE;', (AsIs(table),))
 
         self.stdout.write(self.style.SUCCESS('Successfully dropped {{ cookiecutter.app_name }} tables. ' +
             '`pip uninstall {{ cookiecutter.app_name }}` and remove from your INSTALLED_APPS to finish uninstall.'))

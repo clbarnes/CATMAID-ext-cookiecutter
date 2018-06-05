@@ -1,0 +1,21 @@
+language: python
+python:
+  - 3.6
+  - 3.5
+  - 3.4
+  - 2.7
+
+env:
+  - EXT_DIR="CATMAID-myextension"
+
+before_install:
+  - pip install cookiecutter flake8
+  - npm install jshint csslint
+
+install:
+  - cookiecutter --no-input . -o $EXT_DIR
+
+script:
+  - flake8 --config .travis.flake8 $EXT_DIR
+  - jshint --config .travis.jshintrc $EXT_DIR
+  - csslint --config .travis.jshintrc $EXT_DIR

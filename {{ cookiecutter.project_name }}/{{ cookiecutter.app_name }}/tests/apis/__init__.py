@@ -2,7 +2,9 @@
 import json
 from {{ cookiecutter.app_name }}.tests.common import {{ cookiecutter.app_name.title() }}TestCase
 
+
 URL_PREFIX = '/ext/{{ cookiecutter.app_name }}'
+
 
 class InstallationTest({{ cookiecutter.app_name.title() }}TestCase):
     def test_is_installed(self):

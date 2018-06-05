@@ -21,11 +21,11 @@
       helpText: '{{ cookiecutter.app_name.title() }} Widget: ',
       controlsID: this.idPrefix + 'controls',
       createControls: function(controls) {
-        controls.appendChild(document.createTextNode('Controls go here'))
+        controls.appendChild(document.createTextNode('Controls go here'));
       },
       contentID: this.idPrefix + 'content',
       createContent: function(container) {
-        container.appendChild(document.createTextNode('Content goes here'))
+        container.appendChild(document.createTextNode('Content goes here'));
       },
       init: function() {}
     };
