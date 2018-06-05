@@ -8,6 +8,7 @@
   var {{ cookiecutter.app_name.title() }}Widget = function() {
     this.widgetID = this.registerInstance();
     this.idPrefix = `{{ cookiecutter.app_name }}-widget${this.widgetID}-`;
+  };
 
   $.extend({{ cookiecutter.app_name.title() }}Widget.prototype, new InstanceRegistry());
 
@@ -24,7 +25,7 @@
       },
       contentID: this.idPrefix + 'content',
       createContent: function(container) {
-        container.appendChild(document.createTextNode('Controls go here'))
+        container.appendChild(document.createTextNode('Content goes here'))
       },
       init: function() {}
     };
