@@ -32,5 +32,7 @@ class Command(BaseCommand):
 
             cursor.execute('DROP TABLE IF EXISTS %s CASCADE;', (AsIs(table),))
 
-        self.stdout.write(self.style.SUCCESS('Successfully dropped {{ cookiecutter.app_name }} tables. ' +
-            '`pip uninstall {{ cookiecutter.app_name }}` and remove from your INSTALLED_APPS to finish uninstall.'))
+        self.stdout.write(self.style.SUCCESS(
+            'Successfully dropped {{ cookiecutter.app_name }} tables. '
+            '`pip uninstall {{ cookiecutter.app_name }}` and remove from your INSTALLED_APPS to finish uninstall.'
+        ))

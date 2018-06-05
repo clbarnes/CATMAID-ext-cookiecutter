@@ -5,12 +5,16 @@ cache: pip
 python:
   {% if cookiecutter.supports_py2 == 'y' -%}
   - "2.7"
+  {% if cookiecutter.supports_pypy == 'y' -%}
   - "pypy"
+  {%- endif %}
   {%- endif %}
   {% if cookiecutter.supports_py3 == 'y' -%}
   - "3.5"
   - "3.6"
+  {% if cookiecutter.supports_pypy == 'y' -%}
   - "pypy3"
+  {%- endif %}
   {%- endif %}
 env:
   - CATMAID_DIR=$TRAVIS_BUILD_DIR/travis/CATMAID CATMAID_BRANCH=master
@@ -20,7 +24,7 @@ matrix:
   allow_failures:
     - env: CATMAID_DIR=$TRAVIS_BUILD_DIR/travis/CATMAID CATMAID_BRANCH=dev
 addons:
-  postgresql: 9.6  # will be replaced by v10
+  postgresql: 9.6  # will be replaced by v10, travis doesn't have it yet
 before_install:
   - travis_retry sudo apt-get update -qq
   # setup CATMAID
@@ -30,7 +34,9 @@ before_install:
   - ./scripts/travis/install_requirements.sh
   - ./scripts/travis/setup_database.sh
   - ./scripts/travis/configure_catmaid.sh
-  - pip install coveralls
+  - pip install coveralls flake8
+  - npm install jslint
+  - export PATH=$(npm bin):$PATH
 install:
   - pip install -e $TRAVIS_BUILD_DIR
   - cd $CATMAID_DIR/django/projects
@@ -38,6 +44,9 @@ install:
   - python manage.py collectstatic --link --noinput
 script:
   - coverage run --source={{ cookiecutter.app_name }} manage.py test {{ cookiecutter.app_name }}.tests
+  - cd $TRAVIS_BUILD_DIR
+  - flake8 --config .travis.flake8 --exclude=$CATMAID_DIR .
+  - jshint --config .travis.jshintrc --exclude=$CATMAID_DIR .
 after_success:
   - coveralls
 
