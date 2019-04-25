@@ -40,15 +40,16 @@ before_install:
   # Set up and start postgres, create database, write config files
   - ./scripts/travis/setup_database.sh
   - ./scripts/travis/configure_catmaid.sh
-  - export PATH=$(npm bin):$PATH
 install:
-  - pip install -e $TRAVIS_BUILD_DIR
+  - export PATH=$(npm bin):$PATH
+  - pip install $TRAVIS_BUILD_DIR
   - cd $CATMAID_DIR/django/projects
   - python manage.py migrate --noinput
   - python manage.py collectstatic --link --noinput
 script:
   - coverage run --source={{ cookiecutter.app_name }} manage.py test {{ cookiecutter.app_name }}.tests
   - cd $TRAVIS_BUILD_DIR
+  - if [ -x "$(command -v mypy)" ]; then mypy --config-file mypy.ini ./ || true; fi
   - flake8 --config .travis.flake8 --exclude=$CATMAID_DIR .
   - jshint --config .travis.jshintrc --exclude=$CATMAID_DIR .
 after_success:
