@@ -34,3 +34,9 @@ tl;dr
 This is unlikely to be actively maintained as CATMAID changes
 (e.g. directory reorganisation, travis build steps, widget conventions),
 but pull requests to update it are welcome!
+
+Fork and clone the [CATMAID-myextension repo](https://github.com/clbarnes/CATMAID-myextension)
+into the [examples/](examples/) directory.
+Make your changes to `CATMAID-ext-cookiecutter` and then run [examples/regenerate.sh](examples/regenerate.sh)
+to write your template's output into that repo and make a commit.
+The commit message will contain the `CATMAID-ext-cookiecutter`'s current hash and working directory diff.
