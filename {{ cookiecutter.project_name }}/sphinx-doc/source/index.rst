@@ -5,6 +5,8 @@
 
 Welcome to { cookiecutter.project_name }'s documentation!
 =========================================================
+{ cookiecutter.project_name } is an extension for `CATMAID <https://catmaid.readthedocs.io/en/stable/>`_
+
 
 .. toctree::
    :maxdepth: 2
